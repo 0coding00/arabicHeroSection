@@ -8,19 +8,43 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+
+  /* edited: single source of truth for font stacks */
+  --font-sans: var(--font-cairo), var(--font-tajawal), var(--font-geist-sans),
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans",
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
   --font-mono: var(--font-geist-mono);
+}
+
+/* Optional utility: force Aref Ruqaa (display heading, etc.) */
+.font-arabic {
+  font-family: var(--font-aref-ruqaa-ink), serif;
+}
+
+/* edited: explicit Cairo utility */
+.font-cairo {
+  font-family: var(--font-cairo), ui-sans-serif, system-ui, -apple-system;
+}
+
+/* edited: keep a Tajawal utility if you need to override per-component */
+.font-tajawal {
+  font-family: var(--font-tajawal), ui-sans-serif, system-ui, -apple-system;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #000; /* keep your current choice, adjust if needed */
   }
 }
+
+/* removed: body font-family override to not break Tailwind's font-sans */
+/* body {
+  background: var(--background);
+  color: var(--foreground);
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
